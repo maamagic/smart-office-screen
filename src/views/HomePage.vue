@@ -78,7 +78,7 @@ const eventTypeColors: Record<string, string> = {
 
         <!-- 今日事件 -->
         <TechPanel class="flex-1 overflow-hidden" title="今日事件">
-          <div class="space-y-2 overflow-y-auto no-scrollbar max-h-[180px]">
+          <div class="space-y-2 overflow-y-auto no-scrollbar max-h-[140px]">
             <div
               v-for="(event, index) in store.todayEvents"
               :key="index"

@@ -50,7 +50,7 @@ function init() {
   // Camera
   camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000)
   camera.position.set(30, 28, 40)
-  camera.lookAt(0, 12, 0)
+  camera.lookAt(0, 0, 0)
 
   // Renderer
   renderer = new THREE.WebGLRenderer({
@@ -403,7 +403,7 @@ function animate() {
   camera.position.x = 40 * Math.cos(currentRotationY)
   camera.position.z = 40 * Math.sin(currentRotationY + Math.PI / 2)
   camera.position.y = 28 + currentRotationX * 20
-  camera.lookAt(0, 12, 0)
+  camera.lookAt(0, 0, 0)
 
   // Antenna light blink
   buildingGroup.traverse((child) => {
@@ -541,7 +541,7 @@ onUnmounted(() => {
     </div>
 
     <!-- Legend overlay -->
-    <div class="absolute bottom-3 left-3 flex items-center gap-4 px-3 py-1.5 rounded bg-bg-panel/70 border border-border-glow/30 backdrop-blur-sm">
+    <div class="absolute bottom-[60px] left-3 flex items-center gap-4 px-3 py-1.5 rounded bg-bg-panel/70 border border-border-glow/30 backdrop-blur-sm">
       <div class="flex items-center gap-1.5 text-[10px]">
         <span class="w-2.5 h-2 rounded-sm" style="background: #00ff88;"></span>
         <span class="text-text-secondary">正常</span>

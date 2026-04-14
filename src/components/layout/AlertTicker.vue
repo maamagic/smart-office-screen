@@ -28,7 +28,7 @@ function formatTime(date: Date) {
 
 <template>
   <div
-    class="h-[48px] border-t border-border-glow/50 bg-bg-primary/80 flex items-center overflow-hidden relative"
+    class="h-[48px] border-t border-border-glow/50 bg-bg-primary/80 flex items-center overflow-hidden relative z-50"
     @mouseenter="isPaused = true"
     @mouseleave="isPaused = false"
   >
