@@ -117,3 +117,50 @@ export interface TodayEvent {
   title: string
   type: 'maintenance' | 'meeting' | 'visit' | 'notice'
 }
+
+// ============ 安防模块 ============
+
+// 监控摄像头
+export interface Camera {
+  id: string
+  name: string
+  zone: string
+  status: 'online' | 'offline' | 'recording'
+  hasAlert: boolean
+}
+
+// 人员信息
+export interface Person {
+  id: string
+  name: string
+  type: 'employee' | 'visitor' | 'stranger'
+  department?: string
+  company?: string
+  lastSeen: string
+  lastLocation: string
+  checkInTime?: string
+  checkOutTime?: string
+  escort?: string
+}
+
+// 消防设备
+export interface FireDevice {
+  id: string
+  name: string
+  type: 'smoke' | 'heat' | 'extinguisher' | 'hydrant' | 'emergency-light'
+  location: string
+  status: 'normal' | 'fault' | 'alarm' | 'unchecked'
+  lastCheck?: string
+}
+
+// 安防预警
+export interface SecurityAlert {
+  id: string
+  type: 'camera' | 'person' | 'fire' | 'intrusion'
+  level: 'urgent' | 'warning' | 'info'
+  title: string
+  description: string
+  location: string
+  timestamp: Date
+  status: 'unhandled' | 'handling' | 'resolved'
+}
