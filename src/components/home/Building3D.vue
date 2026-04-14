@@ -29,6 +29,7 @@ let currentRotationX = 0.15
 let buildingGroup: THREE.Group
 let raycaster: THREE.Raycaster
 let mouse: THREE.Vector2
+let resizeObserver: ResizeObserver | null = null
 
 const statusColors: Record<string, number> = {
   occupied: 0x00ff88,
@@ -40,8 +41,16 @@ const statusColors: Record<string, number> = {
 function init() {
   if (!containerRef.value) return
 
-  const width = containerRef.value.clientWidth
-  const height = containerRef.value.clientHeight
+  // 确保容器有明确的尺寸
+  const rect = containerRef.value.getBoundingClientRect()
+  const width = rect.width || containerRef.value.clientWidth || 800
+  const height = rect.height || containerRef.value.clientHeight || 600
+
+  if (width === 0 || height === 0) {
+    console.warn('Building3D: Container has no size, retrying...')
+    setTimeout(init, 100)
+    return
+  }
 
   // Scene
   scene = new THREE.Scene()
@@ -384,12 +393,17 @@ function onMouseMove(event: MouseEvent) {
 }
 
 function onResize() {
-  if (!containerRef.value) return
-  const width = containerRef.value.clientWidth
-  const height = containerRef.value.clientHeight
+  if (!containerRef.value || !camera || !renderer) return
+
+  const rect = containerRef.value.getBoundingClientRect()
+  const width = Math.max(1, Math.floor(rect.width))
+  const height = Math.max(1, Math.floor(rect.height))
+
+  if (width === 0 || height === 0) return
+
   camera.aspect = width / height
   camera.updateProjectionMatrix()
-  renderer.setSize(width, height)
+  renderer.setSize(width, height, false)
 }
 
 function animate() {
@@ -502,15 +516,31 @@ watch(() => props.floors, () => {
 }, { deep: true })
 
 onMounted(() => {
+  // 使用 ResizeObserver 更可靠地监听容器尺寸变化
+  if (containerRef.value) {
+    resizeObserver = new ResizeObserver(() => {
+      onResize()
+    })
+    resizeObserver.observe(containerRef.value)
+  }
+
   init()
   animate()
 })
 
 onUnmounted(() => {
   cancelAnimationFrame(animationId)
+
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+    resizeObserver = null
+  }
+
   if (containerRef.value && renderer) {
     containerRef.value.removeEventListener('mousemove', onMouseMove)
-    containerRef.value.removeChild(renderer.domElement)
+    if (renderer.domElement.parentNode === containerRef.value) {
+      containerRef.value.removeChild(renderer.domElement)
+    }
   }
   window.removeEventListener('resize', onResize)
   renderer?.dispose()
