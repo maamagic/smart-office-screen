@@ -12,8 +12,8 @@ defineProps<{
 <template>
   <DataCard title="设备运行率" bg-variant="purple" to="/operations" :delay="delay">
     <div class="flex items-center gap-2">
-      <!-- 左侧仪表盘 -->
-      <div class="w-[100px] h-[80px]">
+      <!-- 左侧仪表盘 - 使用正方形容器避免拉伸 -->
+      <div class="w-[90px] h-[90px] flex-shrink-0">
         <GaugeChart :value="data.rate" />
       </div>
       <!-- 右侧信息 -->

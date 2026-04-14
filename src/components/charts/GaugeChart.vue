@@ -16,13 +16,15 @@ const props = withDefaults(defineProps<{
 })
 
 const option = computed(() => ({
+  // 保持图表在非正方形容器中不变形
+  animation: false,
   series: [
     {
       type: 'gauge',
       startAngle: 210,
       endAngle: -30,
-      radius: '85%',
-      center: ['50%', '60%'],
+      radius: '90%',
+      center: ['50%', '55%'],
       min: 0,
       max: 100,
       splitNumber: 5,
@@ -65,5 +67,9 @@ const option = computed(() => ({
 </script>
 
 <template>
-  <VChart :option="option" autoresize style="width: 100%; height: 100%;" />
+  <VChart 
+    :option="option" 
+    autoresize 
+    style="width: 100%; height: 100%; min-width: 50px; min-height: 50px;" 
+  />
 </template>

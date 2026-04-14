@@ -34,7 +34,7 @@ function handleClick() {
     :style="{
       animationDelay: `${(delay || 0) * 100}ms`,
       borderLeftColor: accentColor,
-      borderLeftWidth: '3px',
+      borderLeftWidth: '8px',
     }"
     @click="handleClick"
   >

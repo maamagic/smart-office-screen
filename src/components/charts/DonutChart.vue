@@ -15,6 +15,8 @@ const props = defineProps<{
 }>()
 
 const option = computed(() => ({
+  // 保持图表比例不变形
+  animation: false,
   tooltip: {
     trigger: 'item',
     backgroundColor: 'rgba(10, 22, 40, 0.9)',
@@ -60,5 +62,9 @@ const option = computed(() => ({
 </script>
 
 <template>
-  <VChart :option="option" autoresize style="width: 100%; height: 100%;" />
+  <VChart 
+    :option="option" 
+    autoresize 
+    style="width: 100%; height: 100%; min-width: 50px; min-height: 50px;" 
+  />
 </template>
