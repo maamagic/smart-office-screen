@@ -571,7 +571,7 @@ onUnmounted(() => {
     </div>
 
     <!-- Legend overlay -->
-    <div class="absolute bottom-[60px] left-3 flex items-center gap-4 px-3 py-1.5 rounded bg-bg-panel/70 border border-border-glow/30 backdrop-blur-sm">
+    <div class="absolute bottom-2 left-2 flex items-center gap-4 px-3 py-1.5 rounded bg-bg-panel/70 border border-border-glow/30 backdrop-blur-sm">
       <div class="flex items-center gap-1.5 text-[10px]">
         <span class="w-2.5 h-2 rounded-sm" style="background: #00ff88;"></span>
         <span class="text-text-secondary">正常</span>

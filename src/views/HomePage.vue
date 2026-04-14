@@ -21,17 +21,17 @@ const eventTypeColors: Record<string, string> = {
     <CoreOverview />
 
     <!-- 主内容区: 楼层可视化 + 侧边面板 -->
-    <div class="flex-1 grid grid-cols-5 gap-4 min-h-0">
+    <div class="flex-1 grid grid-cols-5 gap-4 min-h-0 overflow-hidden">
       <!-- 3D 楼宇模型 (3列) -->
-      <div class="col-span-3 h-full">
+      <div class="col-span-3">
         <Building3D :floors="store.floors" />
       </div>
 
       <!-- 侧边面板 (2列) -->
-      <div class="col-span-2 flex flex-col gap-3">
+      <div class="col-span-2 flex flex-col gap-3 min-h-0 overflow-hidden">
         <!-- 会议室状态 -->
-        <TechPanel title="会议室状态" class="flex-1 overflow-hidden">
-          <div class="space-y-2 overflow-y-auto no-scrollbar max-h-[180px]">
+        <TechPanel title="会议室状态" class="flex-1 min-h-0">
+          <div class="space-y-2">
             <div
               v-for="room in store.meetingRooms"
               :key="room.name"
@@ -55,7 +55,7 @@ const eventTypeColors: Record<string, string> = {
         </TechPanel>
 
         <!-- 电梯状态 -->
-        <TechPanel title="电梯状态">
+        <TechPanel title="电梯状态" class="flex-shrink-0">
           <div class="grid grid-cols-3 gap-2">
             <div
               v-for="el in store.elevators"
@@ -77,8 +77,8 @@ const eventTypeColors: Record<string, string> = {
         </TechPanel>
 
         <!-- 今日事件 -->
-        <TechPanel class="flex-1 overflow-hidden" title="今日事件">
-          <div class="space-y-2 overflow-y-auto no-scrollbar max-h-[140px]">
+        <TechPanel title="今日事件" class="flex-1 min-h-0">
+          <div class="space-y-2">
             <div
               v-for="(event, index) in store.todayEvents"
               :key="index"

@@ -164,3 +164,63 @@ export interface SecurityAlert {
   timestamp: Date
   status: 'unhandled' | 'handling' | 'resolved'
 }
+
+// ============ 运维模块 ============
+
+// 运维设备
+export interface OpsDevice {
+  id: string
+  name: string
+  category: 'elevator' | 'ac' | 'ventilation' | 'cctv' | 'lighting' | 'plumbing'
+  model: string
+  location: string
+  installDate: string
+  status: 'running' | 'stopped' | 'fault' | 'maintenance'
+  runHours: number
+  nextMaintenance: string
+  faultHistory: FaultRecord[]
+  maintenanceHistory: MaintenanceRecord[]
+}
+
+export interface FaultRecord {
+  date: string
+  type: string
+  description: string
+  resolved: boolean
+  resolvedDate?: string
+}
+
+export interface MaintenanceRecord {
+  date: string
+  technician: string
+  description: string
+}
+
+// 能源数据
+export interface EnergyData {
+  daily: number
+  monthly: number
+  yearly: number
+  yesterday: number
+  lastMonth: number
+  lastYear: number
+}
+
+// 分区能耗
+export interface ZoneEnergy {
+  name: string
+  electricity: number
+  water: number
+  trend: number // 同比百分比
+}
+
+// 环境数据
+export interface EnvironmentData {
+  zone: string
+  temperature: number
+  humidity: number
+  pm25: number
+  co2: number
+  formaldehyde: number
+  status: 'normal' | 'warning' | 'danger'
+}
