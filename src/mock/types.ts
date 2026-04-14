@@ -224,3 +224,142 @@ export interface EnvironmentData {
   formaldehyde: number
   status: 'normal' | 'warning' | 'danger'
 }
+
+// ============ 企业服务模块 ============
+
+// 入驻企业
+export interface Tenant {
+  id: string
+  name: string
+  floor: string
+  area: number
+  employees: number
+  contact: string
+  phone: string
+  status: 'normal' | 'pending' | 'expiring'
+  leaseEnd: string
+}
+
+// 会议室
+export interface MeetingRoomInfo {
+  id: string
+  name: string
+  floor: string
+  capacity: number
+  equipment: string[]
+  status: 'available' | 'occupied' | 'maintenance'
+}
+
+// 会议室预约
+export interface MeetingReservation {
+  id: string
+  roomName: string
+  company: string
+  applicant: string
+  date: string
+  timeRange: string
+  topic: string
+  status: 'confirmed' | 'pending' | 'cancelled'
+}
+
+// 便民服务
+export interface ConvenienceService {
+  id: string
+  name: string
+  type: 'food' | 'transport' | 'medical' | 'shopping' | 'repair' | 'other'
+  description: string
+  location: string
+  hours: string
+  phone: string
+  rating: number
+}
+
+// 通知公告
+export interface Notice {
+  id: string
+  title: string
+  content: string
+  type: 'notice' | 'urgent' | 'maintenance' | 'activity'
+  publisher: string
+  publishTime: Date
+  targetAudience: string
+  status: 'published' | 'draft' | 'expired'
+}
+
+// ============ 数据统计模块 ============
+
+// 人员统计趋势
+export interface PeopleTrendData {
+  date: string
+  employees: number
+  visitors: number
+  total: number
+}
+
+// 设备使用统计
+export interface DeviceUsageStats {
+  category: string
+  total: number
+  usageRate: number
+  faultRate: number
+  trend: number
+}
+
+// 能源统计
+export interface EnergyStats {
+  type: string
+  today: number
+  month: number
+  year: number
+  cost: number
+  trend: number
+}
+
+// 服务统计
+export interface ServiceStats {
+  type: string
+  count: number
+  satisfaction: number
+  trend: number
+}
+
+// ============ 系统设置模块 ============
+
+// 用户账号
+export interface UserAccount {
+  id: string
+  username: string
+  role: 'admin' | 'operator' | 'viewer'
+  department: string
+  lastLogin: string
+  status: 'active' | 'inactive' | 'locked'
+}
+
+// 预警阈值配置
+export interface AlertThreshold {
+  id: string
+  category: string
+  name: string
+  warning: number
+  urgent: number
+  unit: string
+  enabled: boolean
+}
+
+// 系统配置
+export interface SystemConfig {
+  key: string
+  name: string
+  value: string
+  description: string
+}
+
+// 数据备份记录
+export interface BackupRecord {
+  id: string
+  date: string
+  time: string
+  size: string
+  type: 'auto' | 'manual'
+  status: 'success' | 'failed' | 'in_progress'
+}
